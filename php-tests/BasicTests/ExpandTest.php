@@ -1,0 +1,47 @@
+<?php
+
+use kalanis\kw_bans\Bans;
+use kalanis\kw_bans\BanException;
+
+
+class ExpandTest extends CommonTestClass
+{
+    /**
+     * @param string $inIp
+     * @param array $onParts
+     * @param int $mask
+     * @param bool $canCrash
+     * @throws BanException
+     * @dataProvider basicExpandProvider
+     */
+    public function testBasicExpand(string $inIp, array $onParts, int $mask, bool $canCrash)
+    {
+        $data = new XExpandIp();
+        if ($canCrash) $this->expectException(BanException::class);
+        $ip = $data->expandIP($inIp);
+        if (!$canCrash) {
+            $this->assertEquals($onParts, $ip->getAddress());
+            $this->assertEquals($mask, $ip->getAffectedBits());
+        }
+    }
+
+    public function basicExpandProvider()
+    {
+        return [
+            ['asdf.ghjk.qwer.tzui', ['asdf', 'ghjk', 'qwer', 'tzui'], 0, false], // not need to expand
+            ['asdf.ghjk.qwer.tzui/23', ['asdf', 'ghjk', 'qwer', 'tzui'], 23, false], // affected bits
+            ['asdf..tzui', ['asdf', '0', '0', 'tzui'], 0, false], // simple expand
+            ['asdf..', ['asdf', '0', '0', '0'], 0, false], // simple expand to the end
+            ['..tzui', ['0', '0', '0', 'tzui'], 0, false], // simple expand from start
+            ['asdf.ghjk.qwer..tzui', ['asdf', 'ghjk', 'qwer', 'tzui'], 0, false], // no need to expand
+            ['asdf.ghjk.qwer.tzui.op', [], 0, true], // bad amount of blocks
+            ['asdf.ghjk.qwer.tzui..op', [], 0, true], // bad amount of blocks after expand
+        ];
+    }
+}
+
+
+class XExpandIp
+{
+    use Bans\TExpandIp;
+}

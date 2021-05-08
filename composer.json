@@ -1,0 +1,27 @@
+{
+    "name": "alex-kalanis/kw_bans",
+    "description": "Bans in KWCMS",
+    "keywords": [
+        "bans"
+    ],
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "require": {
+        "ext-mbstring": "*",
+        "php": ">=7.2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=7.2"
+    },
+    "suggest": {
+    },
+    "autoload": {
+        "psr-4": {
+            "kalanis\\kw_bans\\": "php-src/"
+        }
+    },
+    "scripts": {
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
