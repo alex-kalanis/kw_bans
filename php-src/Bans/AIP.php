@@ -3,6 +3,7 @@
 namespace kalanis\kw_bans\Bans;
 
 
+use kalanis\kw_bans\BanException;
 use kalanis\kw_bans\Ip;
 use kalanis\kw_bans\Sources\ASources;
 
@@ -25,6 +26,10 @@ abstract class AIP extends ABan
         }, $source->getRecords());
     }
 
+    /**
+     * @param string $lookedFor
+     * @throws BanException
+     */
     public function setLookedFor(string $lookedFor): void
     {
         $this->searchIp = $this->expandIP($lookedFor);
@@ -83,6 +88,9 @@ abstract class AIP extends ABan
         // direct for *
         if ("*" == $known[0]) {
             return true;
+        }
+        if (strlen($known) != strlen($tested)) {
+            return false;
         }
         // through for ?
         for ($i = 0; $i < strlen($known); $i++) {

@@ -30,6 +30,6 @@ familiar with composer)
 
 ## Why?
 
-The comparation cannot be done by direct querying over database - even if the database
+The comparison cannot be done by direct querying over database - even if the database
 engine supports parts like IP address then it isn't possible to match content due necessity
-to manage affected bits from the end - so then the external library.
+to access affected bits directly - so then the external library.

@@ -11,11 +11,12 @@ use kalanis\kw_bans\Sources;
 /**
  * Class Factory
  * @package kalanis\kw_bans\Bans
+ * Selecting correct form of ban check
  */
 class Factory
 {
-    const PREG_IP4 = '#[0-9\./]+#i';
-    const PREG_IP6 = '#[0-9a-f:/]+#i';
+    const PREG_IP4 = '#[0-9\./\*]+#i';
+    const PREG_IP6 = '#[0-9a-f:/\*]+#i';
     const PREG_NAME = '#[\*\?\:;\\//]#i';
 
     /**
@@ -50,7 +51,9 @@ class Factory
     public function whichType($source): ABan
     {
         $source = $this->determineSource($source);
-        if ($this->containsIp4($source)) {
+        if ($this->emptyContent($source)) {
+            return $this->getBan(IIpTypes::TYPE_BASIC, $source);
+        } elseif ($this->containsIp4($source)) {
             return $this->getBan(IIpTypes::TYPE_IP_4, $source);
         } elseif ($this->containsIp6($source)) {
             return $this->getBan(IIpTypes::TYPE_IP_6, $source);
@@ -78,6 +81,11 @@ class Factory
             return new Sources\File($source);
         }
         throw new BanException('Unknown datasource format');
+    }
+
+    protected function emptyContent(Sources\ASources $sources): bool
+    {
+        return empty( $sources->getRecords() );
     }
 
     protected function containsIp4(Sources\ASources $sources): bool

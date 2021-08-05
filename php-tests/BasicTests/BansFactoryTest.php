@@ -40,6 +40,7 @@ class BansFactoryTest extends CommonTestClass
     public function testTypeSelector()
     {
         $data = new Bans\Factory();
+        $this->assertNotEmpty($data->whichType(new Sources\Arrays([])));
         $this->assertNotEmpty($data->whichType(new Sources\Arrays(['qwer', 'tzui'])));
         $this->assertNotEmpty($data->whichType(['qwer', 'tzui']));
         $this->assertNotEmpty($data->whichType(realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'testfile.txt')));

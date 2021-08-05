@@ -6,6 +6,11 @@ namespace kalanis\kw_bans\Bans;
 use kalanis\kw_bans\Sources\ASources;
 
 
+/**
+ * Class Basic
+ * @package kalanis\kw_bans\Bans
+ * Basic bans, just compare strings
+ */
 class Basic extends ABan
 {
     /** @var string[] */

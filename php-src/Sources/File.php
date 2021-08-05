@@ -9,7 +9,7 @@ use kalanis\kw_bans\BanException;
 /**
  * Class File
  * @package kalanis\kw_bans\Sources
- * Bans source is file
+ * Bans source is file somewhere
  */
 class File extends ASources
 {
@@ -17,7 +17,7 @@ class File extends ASources
     {
         $rows = @file($file);
         if (false === $rows) {
-            throw new BanException('Defined file is not found');
+            throw new BanException('Defined file was not found');
         }
 
         // remove empty records

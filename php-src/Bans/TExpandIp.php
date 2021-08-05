@@ -8,6 +8,11 @@ use kalanis\kw_bans\Interfaces\IIpTypes;
 use kalanis\kw_bans\Ip;
 
 
+/**
+ * Trait TExpandIp
+ * @package kalanis\kw_bans\Bans
+ * Expanding IP addresses to their full representation
+ */
 trait TExpandIp
 {
     protected $type = IIpTypes::TYPE_NONE;

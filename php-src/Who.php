@@ -3,7 +3,15 @@
 namespace kalanis\kw_bans;
 
 
-class Who
+use kalanis\kw_bans\Interfaces\IWho;
+
+
+/**
+ * Class Who
+ * @package kalanis\kw_bans
+ * Basic representation of someone who will be checked for bans
+ */
+class Who implements IWho
 {
     /** @var string */
     protected $ipAddress = '';
