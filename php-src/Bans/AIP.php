@@ -3,14 +3,16 @@
 namespace kalanis\kw_bans\Bans;
 
 
-use kalanis\kw_bans\BanException;
+use kalanis\kw_bans\Interfaces\IKBTranslations;
 use kalanis\kw_bans\Ip;
 use kalanis\kw_bans\Sources\ASources;
+use kalanis\kw_bans\Translations;
 
 
 abstract class AIP extends ABan
 {
     use TExpandIp;
+    use TLangIp;
 
     /** @var Ip[] */
     protected $knownIps = [];
@@ -19,17 +21,15 @@ abstract class AIP extends ABan
 
     protected $bitsInBlock = 4;
 
-    public function __construct(ASources $source)
+    public function __construct(ASources $source, ?IKBTranslations $lang = null)
     {
+        $this->setLang($lang ?: new Translations());
+        $this->setBasicIp(new Ip());
         $this->knownIps = array_map(function ($row) {
             return $this->expandIP($row);
         }, $source->getRecords());
     }
 
-    /**
-     * @param string $lookedFor
-     * @throws BanException
-     */
     public function setLookedFor(string $lookedFor): void
     {
         $this->searchIp = $this->expandIP($lookedFor);

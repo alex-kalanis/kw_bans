@@ -3,14 +3,10 @@
 namespace kalanis\kw_bans\Bans;
 
 
+use kalanis\kw_bans\Interfaces\IKBTranslations;
 use kalanis\kw_bans\Sources\ASources;
 
 
-/**
- * Class Basic
- * @package kalanis\kw_bans\Bans
- * Basic bans, just compare strings
- */
 class Basic extends ABan
 {
     /** @var string[] */
@@ -18,7 +14,7 @@ class Basic extends ABan
     /** @var string */
     protected $searchKey = '';
 
-    public function __construct(ASources $source)
+    public function __construct(ASources $source, ?IKBTranslations $lang = null)
     {
         $this->knownRecords = $source->getRecords();
     }

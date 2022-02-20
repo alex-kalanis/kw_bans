@@ -4,20 +4,28 @@ namespace kalanis\kw_bans\Sources;
 
 
 use kalanis\kw_bans\BanException;
+use kalanis\kw_bans\Interfaces\IKBTranslations;
+use kalanis\kw_bans\Translations;
 
 
 /**
  * Class File
  * @package kalanis\kw_bans\Sources
- * Bans source is file somewhere
+ * Bans source is file
  */
 class File extends ASources
 {
-    public function __construct(string $file)
+    /**
+     * @param string $file
+     * @param IKBTranslations|null $lang
+     * @throws BanException
+     */
+    public function __construct(string $file, ?IKBTranslations $lang = null)
     {
+        $lang = $lang ?: new Translations();
         $rows = @file($file);
         if (false === $rows) {
-            throw new BanException('Defined file was not found');
+            throw new BanException($lang->ikbDefinedFileNotFound($file));
         }
 
         // remove empty records

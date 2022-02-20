@@ -6,11 +6,6 @@ namespace kalanis\kw_bans\Bans;
 use kalanis\kw_bans\Interfaces\IIpTypes;
 
 
-/**
- * Class IP4
- * @package kalanis\kw_bans\Bans
- * Check IP address v4
- */
 class IP4 extends AIP
 {
     protected $type = IIpTypes::TYPE_IP_4;

@@ -2,6 +2,8 @@
 
 use kalanis\kw_bans\Bans;
 use kalanis\kw_bans\BanException;
+use kalanis\kw_bans\Ip;
+use kalanis\kw_bans\Translations;
 
 
 class ExpandTest extends CommonTestClass
@@ -44,4 +46,11 @@ class ExpandTest extends CommonTestClass
 class XExpandIp
 {
     use Bans\TExpandIp;
+    use Bans\TLangIp;
+
+    public function __construct()
+    {
+        $this->setLang(new Translations());
+        $this->setBasicIp(new Ip());
+    }
 }
