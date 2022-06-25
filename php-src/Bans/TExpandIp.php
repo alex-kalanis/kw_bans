@@ -42,7 +42,7 @@ trait TExpandIp
             $cutEnd = $shortenedPart + strlen($this->delimiter . $this->delimiter);
             $endPart = (strlen($knownIp) == $cutEnd) ? [] : (array) explode($this->delimiter, substr($knownIp, $cutEnd));
             $unfilledBlocks = $this->blocks - (count($beginPart) + count($endPart));
-            if ($unfilledBlocks < 0) {
+            if (0 > $unfilledBlocks) {
                 throw new BanException($this->getLang()->ikbInvalidNumOfBlocksTooMany($knownIp));
             }
             $ipInArray = array_merge($beginPart, array_fill(0, $unfilledBlocks, '0'), $endPart);

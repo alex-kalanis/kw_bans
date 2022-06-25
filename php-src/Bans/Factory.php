@@ -130,6 +130,6 @@ class Factory
      */
     public function checkForNames(string $content): bool
     {
-        return (bool)preg_match(static::PREG_NAME, $content);
+        return (bool) preg_match(static::PREG_NAME, $content);
     }
 }
