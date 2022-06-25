@@ -1,6 +1,7 @@
 <?php
 
 use kalanis\kw_bans\Bans;
+use kalanis\kw_bans\BanException;
 
 
 class CompleteBansTest extends CommonTestClass
@@ -8,6 +9,7 @@ class CompleteBansTest extends CommonTestClass
     /**
      * @param array $compareData
      * @param bool $isBanned
+     * @throws BanException
      * @dataProvider completeBansProvider
      */
     public function testEntry(array $compareData, bool $isBanned)

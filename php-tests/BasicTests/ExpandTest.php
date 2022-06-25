@@ -16,7 +16,7 @@ class ExpandTest extends CommonTestClass
      * @throws BanException
      * @dataProvider basicExpandProvider
      */
-    public function testBasicExpand(string $inIp, array $onParts, int $mask, bool $canCrash)
+    public function testBasicExpand(string $inIp, array $onParts, int $mask, bool $canCrash): void
     {
         $data = new XExpandIp();
         if ($canCrash) $this->expectException(BanException::class);
@@ -27,7 +27,7 @@ class ExpandTest extends CommonTestClass
         }
     }
 
-    public function basicExpandProvider()
+    public function basicExpandProvider(): array
     {
         return [
             ['asdf.ghjk.qwer.tzui', ['asdf', 'ghjk', 'qwer', 'tzui'], 0, false], // not need to expand
@@ -40,6 +40,16 @@ class ExpandTest extends CommonTestClass
             ['asdf.ghjk.qwer.tzui..op', [], 0, true], // bad amount of blocks after expand
         ];
     }
+
+    /**
+     * @throws BanException
+     */
+    public function testBasicExpandFailedEmptyDelimiter(): void
+    {
+        $data = new XFExpandIp();
+        $this->expectException(BanException::class);
+        $data->expandIP('asdf.ghjk.qwer.tzui');
+    }
 }
 
 
@@ -50,6 +60,20 @@ class XExpandIp
 
     public function __construct()
     {
+        $this->setLang(new Translations());
+        $this->setBasicIp(new Ip());
+    }
+}
+
+
+class XFExpandIp
+{
+    use Bans\TExpandIp;
+    use Bans\TLangIp;
+
+    public function __construct()
+    {
+        $this->delimiter = ''; // intentionally empty!
         $this->setLang(new Translations());
         $this->setBasicIp(new Ip());
     }

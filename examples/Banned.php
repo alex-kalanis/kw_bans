@@ -27,10 +27,10 @@ class Banned
     const PREG_IP6 = '#^[0-9a-f:/]$#i';
     const PREG_NAME = '#^[\*\?\:;\\//]$#i';
 
+    /** @var Bans */
     protected $libBan = null;
 
     /**
-     * Banned constructor.
      * @throws BanException
      */
     public function __construct()

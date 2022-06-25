@@ -1,0 +1,18 @@
+parameters:
+	level: 9
+	paths:
+		- 'php-src'
+#	scanDirectories:
+#		- 'php-tests/external/'
+	scanFiles:
+		- 'php-tests/CommonTestClass.php'
+	excludePaths:
+#		- 'php-tests/external/'
+		- 'php-tests/_autoload.php'
+		- 'php-tests/_bootstrap.php'
+		- 'php-tests/CommonTestClass.php'
+	bootstrapFiles:
+		- 'php-tests/_autoload.php'
+	ignoreErrors:
+		# known one - interface
+		- '#Constructor of class kalanis\\kw_bans\\Bans\\Basic has an unused parameter \$lang\.#'
