@@ -60,7 +60,6 @@ class XExpandIp
 
     public function __construct()
     {
-        $this->setLang(new Translations());
         $this->setBasicIp(new Ip());
     }
 }

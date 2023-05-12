@@ -6,6 +6,7 @@ filter:
     - 'php-tests/_bootstrap.php'
     - 'php-tests/data/*'
     - 'php-tests/external/*'
+    - 'php-tests/*'
   paths:
     - 'php-src/*'
 
