@@ -12,8 +12,6 @@ use kalanis\kw_bans\Traits;
 abstract class AIP extends ABan
 {
     use Traits\TExpandIp;
-    use Traits\TLang;
-    use Traits\TIp;
 
     /** @var Ip[] */
     protected $knownIps = [];

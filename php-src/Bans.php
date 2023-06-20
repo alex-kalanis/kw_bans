@@ -6,6 +6,11 @@ namespace kalanis\kw_bans;
 use kalanis\kw_bans\Bans\ABan;
 
 
+/**
+ * Class Bans
+ * @package kalanis\kw_bans
+ * One of main libraries to process detection if that querying system is on internal lists
+ */
 class Bans
 {
     /** @var Bans\ABan[] */

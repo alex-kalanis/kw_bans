@@ -56,8 +56,6 @@ class ExpandTest extends CommonTestClass
 class XExpandIp
 {
     use Traits\TExpandIp;
-    use Traits\TLang;
-    use Traits\TIp;
 
     public function __construct()
     {
@@ -69,8 +67,6 @@ class XExpandIp
 class XFailExpandIp
 {
     use Traits\TExpandIp;
-    use Traits\TLang;
-    use Traits\TIp;
 
     public function __construct()
     {

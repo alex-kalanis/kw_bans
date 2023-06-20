@@ -5,12 +5,14 @@ namespace kalanis\kw_bans\Traits;
 
 use kalanis\kw_bans\BanException;
 use kalanis\kw_bans\Interfaces\IIpTypes;
-use kalanis\kw_bans\Interfaces\IKBTranslations;
 use kalanis\kw_bans\Ip;
 
 
 trait TExpandIp
 {
+    use TIp;
+    use TLang;
+
     /** @var int */
     protected $type = IIpTypes::TYPE_NONE;
     /** @var int */
@@ -58,8 +60,4 @@ trait TExpandIp
         $ip->setData($this->type, array_map('strval', $ipInArray), $affectedBits);
         return $ip;
     }
-
-    abstract protected function getBasicIp(): Ip;
-
-    abstract protected function getIKbLang(): IKBTranslations;
 }
