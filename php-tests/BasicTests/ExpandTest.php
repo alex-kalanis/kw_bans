@@ -1,8 +1,8 @@
 <?php
 
-use kalanis\kw_bans\Bans;
 use kalanis\kw_bans\BanException;
 use kalanis\kw_bans\Ip;
+use kalanis\kw_bans\Traits;
 use kalanis\kw_bans\Translations;
 
 
@@ -46,7 +46,7 @@ class ExpandTest extends CommonTestClass
      */
     public function testBasicExpandFailedEmptyDelimiter(): void
     {
-        $data = new XFExpandIp();
+        $data = new XFailExpandIp();
         $this->expectException(BanException::class);
         $data->expandIP('asdf.ghjk.qwer.tzui');
     }
@@ -55,25 +55,27 @@ class ExpandTest extends CommonTestClass
 
 class XExpandIp
 {
-    use Bans\TExpandIp;
-    use Bans\TLangIp;
+    use Traits\TExpandIp;
+    use Traits\TLang;
+    use Traits\TIp;
 
     public function __construct()
     {
-        $this->setBasicIp(new Ip());
+        $this->setBasicIp(null);
     }
 }
 
 
-class XFExpandIp
+class XFailExpandIp
 {
-    use Bans\TExpandIp;
-    use Bans\TLangIp;
+    use Traits\TExpandIp;
+    use Traits\TLang;
+    use Traits\TIp;
 
     public function __construct()
     {
         $this->delimiter = ''; // intentionally empty!
-        $this->setLang(new Translations());
+        $this->setIKbLang(new Translations());
         $this->setBasicIp(new Ip());
     }
 }
