@@ -14,7 +14,7 @@ class CompleteBansTest extends CommonTestClass
      */
     public function testEntry(array $compareData, bool $isBanned)
     {
-        $data = new Bans(['qwer', 'tzui', 'asdf', 'ghjk'], ['qwer*', 'tzui', 'asdf', 'ghjk?'], ['10.0.0.1', '127..1', '10../8']);
+        $data = new Bans(null, ['qwer', 'tzui', 'asdf', 'ghjk'], ['qwer*', 'tzui', 'asdf', 'ghjk?'], ['10.0.0.1', '127..1', '10../8']);
         $this->assertEquals($isBanned, $data->has(...$compareData));
     }
 

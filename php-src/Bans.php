@@ -4,6 +4,7 @@ namespace kalanis\kw_bans;
 
 
 use kalanis\kw_bans\Bans\ABan;
+use kalanis\kw_bans\Interfaces\IKBTranslations;
 
 
 /**
@@ -17,12 +18,13 @@ class Bans
     protected $sources = null;
 
     /**
+     * @param IKBTranslations|null $lang
      * @param string|array<string>|array<int, string>|Sources\ASources $sources
      * @throws BanException
      */
-    public function __construct(...$sources)
+    public function __construct(?IKBTranslations $lang = null, ...$sources)
     {
-        $factory = new Bans\Factory();
+        $factory = new Bans\Factory($lang);
         foreach ($sources as $source) {
             $this->sources[] = $factory->whichType($source);
         }

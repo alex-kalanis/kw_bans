@@ -37,6 +37,7 @@ class Banned
     {
         $banPath = $this->getBanPath();
         $this->libBan = new Bans(
+            null,
             new File($banPath . DIRECTORY_SEPARATOR . self::BAN_IP4),
             new File($banPath . DIRECTORY_SEPARATOR . self::BAN_IP6),
             new File($banPath . DIRECTORY_SEPARATOR . self::BAN_NAME)
