@@ -2,6 +2,7 @@
 
 use kalanis\kw_bans\Bans;
 use kalanis\kw_bans\Sources;
+use kalanis\kw_bans\BanException;
 
 
 class IpBansTest extends CommonTestClass
@@ -10,9 +11,10 @@ class IpBansTest extends CommonTestClass
      * @param array $inWhat
      * @param string $looked
      * @param bool $isBanned
+     * @throws BanException
      * @dataProvider ip4Provider
      */
-    public function testIp4Entry(array $inWhat, string $looked, bool $isBanned)
+    public function testIp4Entry(array $inWhat, string $looked, bool $isBanned): void
     {
         $data = new Bans\IP4(new Sources\Arrays($inWhat));
         $data->setLookedFor($looked);
@@ -23,16 +25,17 @@ class IpBansTest extends CommonTestClass
      * @param array $inWhat
      * @param string $looked
      * @param bool $isBanned
+     * @throws BanException
      * @dataProvider ip6Provider
      */
-    public function testIp6Entry(array $inWhat, string $looked, bool $isBanned)
+    public function testIp6Entry(array $inWhat, string $looked, bool $isBanned): void
     {
         $data = new Bans\IP6(new Sources\Arrays($inWhat));
         $data->setLookedFor($looked);
         $this->assertEquals($isBanned, $data->isBanned());
     }
 
-    public function ip4Provider()
+    public function ip4Provider(): array
     {
         return [
             [['10..', ], '40..', false],
@@ -49,7 +52,7 @@ class IpBansTest extends CommonTestClass
         ];
     }
 
-    public function ip6Provider()
+    public function ip6Provider(): array
     {
         return [
             [['::1', ], '::7', false],

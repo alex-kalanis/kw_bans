@@ -6,7 +6,7 @@ use kalanis\kw_bans\BanException;
 
 class SourcesTest extends CommonTestClass
 {
-    public function testArrays()
+    public function testArrays(): void
     {
         $data = new Sources\Arrays(['abcdefghijkl',  'mnopqrstuvwx', 'yz0123456789']);
         $records = $data->getRecords();
@@ -18,7 +18,7 @@ class SourcesTest extends CommonTestClass
     /**
      * @throws BanException
      */
-    public function testFiles()
+    public function testFiles(): void
     {
         $data = new Sources\File(realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'testfile.txt'));
         $records = $data->getRecords();
@@ -28,7 +28,10 @@ class SourcesTest extends CommonTestClass
         $this->assertEquals('yz0123456789', next($records));
     }
 
-    public function testNoFile()
+    /**
+     * @throws BanException
+     */
+    public function testNoFile(): void
     {
         $this->expectException(BanException::class);
         new Sources\File(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'not_exists');

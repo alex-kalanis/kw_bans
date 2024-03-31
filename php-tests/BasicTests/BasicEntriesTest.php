@@ -6,7 +6,7 @@ use kalanis\kw_bans\Ip;
 
 class BasicEntriesTest extends CommonTestClass
 {
-    public function testIpEntry()
+    public function testIpEntry(): void
     {
         $data = new Ip();
         $data->setData(7,  ['abc','def','ghi'], 33);
@@ -15,7 +15,7 @@ class BasicEntriesTest extends CommonTestClass
         $this->assertEquals(33, $data->getAffectedBits());
     }
 
-    public function testWhoEntry()
+    public function testWhoEntry(): void
     {
         $data = new Who();
         $data->setData('abcdefghijkl',  'mnopqrstuvwx', 'yz0123456789');

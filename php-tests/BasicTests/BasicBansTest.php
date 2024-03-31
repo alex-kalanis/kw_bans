@@ -2,6 +2,7 @@
 
 use kalanis\kw_bans\Bans;
 use kalanis\kw_bans\Sources;
+use kalanis\kw_bans\BanException;
 
 
 class BasicBansTest extends CommonTestClass
@@ -11,9 +12,10 @@ class BasicBansTest extends CommonTestClass
      * @param string $looked
      * @param bool $isBasic
      * @param bool $isClearing
+     * @throws BanException
      * @dataProvider basicBansProvider
      */
-    public function testBasicEntry(array $inWhat, string $looked, bool $isBasic, bool $isClearing)
+    public function testBasicEntry(array $inWhat, string $looked, bool $isBasic, bool $isClearing): void
     {
         $data = new Bans\Basic(new Sources\Arrays($inWhat));
         $data->setLookedFor($looked);
@@ -25,16 +27,17 @@ class BasicBansTest extends CommonTestClass
      * @param string $looked
      * @param bool $isBasic
      * @param bool $isClearing
+     * @throws BanException
      * @dataProvider basicBansProvider
      */
-    public function testClearingEntry(array $inWhat, string $looked, bool $isBasic, bool $isClearing)
+    public function testClearingEntry(array $inWhat, string $looked, bool $isBasic, bool $isClearing): void
     {
         $data = new Bans\Clearing(new Sources\Arrays($inWhat));
         $data->setLookedFor($looked);
         $this->assertEquals($isClearing, $data->isBanned());
     }
 
-    public function basicBansProvider()
+    public function basicBansProvider(): array
     {
         return [
             [['asdf', 'ghjk', 'qwer', 'tzui', 'yxcv', 'bnml'], 'poiuztrewq', false, false], // not contains

@@ -19,16 +19,15 @@ use kalanis\kw_bans\Sources\File;
  */
 class Banned
 {
-    const BAN_IP4 = 'ban_ip4.txt';
-    const BAN_IP6 = 'ban_ip6.txt';
-    const BAN_NAME = 'ban_name.txt';
+    public const BAN_IP4 = 'ban_ip4.txt';
+    public const BAN_IP6 = 'ban_ip6.txt';
+    public const BAN_NAME = 'ban_name.txt';
 
-    const PREG_IP4 = '#^[0-9\./]$#i';
-    const PREG_IP6 = '#^[0-9a-f:/]$#i';
-    const PREG_NAME = '#^[\*\?\:;\\//]$#i';
+    protected const PREG_IP4 = '#^[0-9\./]$#i';
+    protected const PREG_IP6 = '#^[0-9a-f:/]$#i';
+    protected const PREG_NAME = '#^[\*\?\:;\\//]$#i';
 
-    /** @var Bans */
-    protected $libBan = null;
+    protected Bans $libBan;
 
     /**
      * @throws BanException

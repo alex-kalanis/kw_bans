@@ -14,13 +14,13 @@ class BansFactoryTest extends CommonTestClass
      * @dataProvider basicGetterProvider
      * @throws BanException
      */
-    public function testBasicGetter(int $type, string $instance)
+    public function testBasicGetter(int $type, string $instance): void
     {
         $data = new Bans\Factory();
         $this->assertInstanceOf($instance, $data->getBan($type, new Sources\Arrays([])));
     }
 
-    public function basicGetterProvider()
+    public function basicGetterProvider(): array
     {
         return [
             [IIpTypes::TYPE_NAME, '\kalanis\kw_bans\Bans\Clearing'],
@@ -30,14 +30,20 @@ class BansFactoryTest extends CommonTestClass
         ];
     }
 
-    public function testBasicGetterFail()
+    /**
+     * @throws BanException
+     */
+    public function testBasicGetterFail(): void
     {
         $data = new Bans\Factory();
         $this->expectException(BanException::class);
         $data->getBan(IIpTypes::TYPE_NONE, new Sources\Arrays([]));
     }
 
-    public function testTypeSelector()
+    /**
+     * @throws BanException
+     */
+    public function testTypeSelector(): void
     {
         $data = new Bans\Factory();
         $this->assertNotEmpty($data->whichType(new Sources\Arrays([])));
@@ -52,13 +58,13 @@ class BansFactoryTest extends CommonTestClass
      * @dataProvider typeGetterProvider
      * @throws BanException
      */
-    public function testGetterByType(array $inputs, string $instance)
+    public function testGetterByType(array $inputs, string $instance): void
     {
         $data = new Bans\Factory();
         $this->assertInstanceOf($instance, $data->whichType($inputs));
     }
 
-    public function typeGetterProvider()
+    public function typeGetterProvider(): array
     {
         return [
             [['qwer', 'tzui', 'asdf', 'ghjk'], '\kalanis\kw_bans\Bans\Clearing'],
@@ -68,7 +74,10 @@ class BansFactoryTest extends CommonTestClass
         ];
     }
 
-    public function testTypeFail()
+    /**
+     * @throws BanException
+     */
+    public function testTypeFail(): void
     {
         $data = new Bans\Factory();
         $this->expectException(BanException::class);

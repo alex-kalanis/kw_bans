@@ -12,13 +12,13 @@ class CompleteBansTest extends CommonTestClass
      * @throws BanException
      * @dataProvider completeBansProvider
      */
-    public function testEntry(array $compareData, bool $isBanned)
+    public function testEntry(array $compareData, bool $isBanned): void
     {
         $data = new Bans(null, ['qwer', 'tzui', 'asdf', 'ghjk'], ['qwer*', 'tzui', 'asdf', 'ghjk?'], ['10.0.0.1', '127..1', '10../8']);
         $this->assertEquals($isBanned, $data->has(...$compareData));
     }
 
-    public function completeBansProvider()
+    public function completeBansProvider(): array
     {
         return [
             [['poiu', 'lkjh', '127.0.0.8'], false],
